@@ -14,9 +14,10 @@ This project was made as part of the Slash Backend Intern Task. It's an implemen
     npx prisma generate
     ```
 
-3. **Set up your database connection in an `.env` file inside the root directory:**
+3. **Set up your `.env` file inside the root directory:**
     ```env
     DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
+    JWT_SECRET="This is a very secret secret key"
     ```
 
 4. **Run the migration:**
