@@ -9,24 +9,24 @@ This project was made as part of the Slash Backend Intern Task. It's an implemen
     npm init
     ```
 
-2. **Set up your database connection in an `.env` file inside the root directory:**
+2. **Generate the Prisma client:**
+    ```bash
+    npx prisma generate
+    ```
+
+3. **Set up your database connection in an `.env` file inside the root directory:**
     ```env
     DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
     ```
 
-3. **Run the migration:**
+4. **Run the migration:**
     ```bash
     npx prisma migrate dev
     ```
 
-4. **Run the seed command:**
+5. **Run the seed command:**
     ```bash
     npx prisma db seed
-    ```
-    
-5. **Generate the Prisma client:**
-    ```bash
-    npx prisma generate
     ```
 
 6. **Start the server:**
