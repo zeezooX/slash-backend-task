@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
@@ -165,8 +166,15 @@ async function seed() {
 
   // Seed users
   for (const user of userData) {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+
+    // Create the user with the hashed password
     const createdUser = await prisma.user.create({
-      data: user,
+      data: {
+        ...user,
+        password: hashedPassword,
+      },
       include: {
         cart: {
           include: {
