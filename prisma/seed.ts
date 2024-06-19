@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 async function seed() {
   console.log('Start seeding ...');
 
+  // Seed products
   const productA = await prisma.product.create({
     data: {
       name: 'Apples',

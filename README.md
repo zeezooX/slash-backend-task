@@ -23,8 +23,13 @@ This project was made as part of the Slash Backend Intern Task. It's an implemen
     ```bash
     npx prisma db seed
     ```
+    
+5. **Generate the Prisma client:**
+    ```bash
+    npx prisma generate
+    ```
 
-5. **Start the server:**
+6. **Start the server:**
     ```bash
     npm run dev
     ```
