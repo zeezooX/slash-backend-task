@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     }
 
     const request = context.switchToHttp().getRequest();
-    const token = request.headers.authorization;
+    const token = request.headers.authorization?.split(' ')[1];
 
     if (!token) {
       return false;
@@ -33,7 +33,6 @@ export class AuthGuard implements CanActivate {
       request.userId = decoded;
       return true;
     } catch (error) {
-      throw error;
       return false;
     }
   }
