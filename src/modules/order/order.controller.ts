@@ -5,8 +5,10 @@ import {
   UpdateOrderStatusDto,
   ApplyCouponDto,
 } from './order.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('orders')
+@ApiTags('Order')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 

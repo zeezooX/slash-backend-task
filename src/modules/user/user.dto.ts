@@ -1,11 +1,6 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import {
-  IsEmail,
-  IsString,
-  IsNotEmpty,
-  IsInt,
-  IsPositive,
-} from 'class-validator';
+import { IsEmail, IsString, IsNotEmpty, IsPositive } from 'class-validator';
 
 /**
  * Data transfer object for signing in a user.
@@ -17,6 +12,12 @@ export class SignInDto {
   @IsString()
   @IsEmail()
   @IsNotEmpty()
+  @ApiProperty({
+    type: String,
+    description: 'The email of the user',
+    required: true,
+    example: 'alice@example.com',
+  })
   email: string;
 
   /**
@@ -24,6 +25,12 @@ export class SignInDto {
    */
   @IsString()
   @IsNotEmpty()
+  @ApiProperty({
+    type: String,
+    description: 'The password of the user',
+    required: true,
+    example: 'password123',
+  })
   password: string;
 }
 
@@ -36,6 +43,12 @@ export class SignUpDto {
    */
   @IsString()
   @IsNotEmpty()
+  @ApiProperty({
+    type: String,
+    description: 'The name of the user',
+    required: true,
+    example: 'Dorice',
+  })
   name: string;
 
   /**
@@ -44,6 +57,12 @@ export class SignUpDto {
   @IsString()
   @IsEmail()
   @IsNotEmpty()
+  @ApiProperty({
+    type: String,
+    description: 'The email of the user',
+    required: true,
+    example: 'dorice@example.com',
+  })
   email: string;
 
   /**
@@ -51,6 +70,12 @@ export class SignUpDto {
    */
   @IsString()
   @IsNotEmpty()
+  @ApiProperty({
+    type: String,
+    description: 'The password of the user',
+    required: true,
+    example: 'password123',
+  })
   password: string;
 
   /**
@@ -58,6 +83,12 @@ export class SignUpDto {
    */
   @IsString()
   @IsNotEmpty()
+  @ApiProperty({
+    type: String,
+    description: 'The address of the user',
+    required: true,
+    example: '123 Main St, Anytown',
+  })
   address: string;
 }
 
@@ -70,5 +101,12 @@ export class GetOrderHistoryDto {
    */
   @IsPositive()
   @Type(() => Number)
+  @ApiProperty({
+    type: Number,
+    description: 'The user ID',
+    required: true,
+    minimum: 1,
+    example: 1,
+  })
   userId: string;
 }
