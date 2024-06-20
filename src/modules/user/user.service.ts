@@ -82,6 +82,9 @@ export class UserService {
       },
     });
 
+    // Remove the password from the user object
+    delete user.password;
+
     return user;
   }
 
