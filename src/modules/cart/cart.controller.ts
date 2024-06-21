@@ -8,8 +8,10 @@ import {
   Param,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
-import { AddToCartDto, UpdateCartDto, RemoveFromCartDto } from './cart.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { AddToCartDto } from './dtos/add-to-cart.dto';
+import { UpdateCartDto } from './dtos/update-cart.dto';
+import { RemoveFromCartDto } from './dtos/remove-from-cart.dto';
 
 @Controller('cart')
 @ApiTags('Cart')

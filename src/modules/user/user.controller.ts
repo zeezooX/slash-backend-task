@@ -1,14 +1,23 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 import { UserService } from './user.service';
-import { GetOrderHistoryDto, SignInDto, SignUpDto } from './user.dto';
 import { Public } from 'src/common/public.decorator';
 import {
   ApiBearerAuth,
   ApiBody,
   ApiOperation,
+  ApiParam,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { SignInDto } from './dtos/sign-in.dto';
+import { SignUpDto } from './dtos/sign-up.dto';
 
 @Controller('users')
 @ApiTags('User')
@@ -75,7 +84,7 @@ export class UserController {
 
   /**
    * Get the order history for a user.
-   * @param getOrderHistoryDto - The data to retrieve the order history.
+   * @param userId - The ID of the user.
    * @returns A promise that resolves to the order history of the user.
    */
   @Get(':userId/orders')
@@ -93,7 +102,13 @@ export class UserController {
     description: 'None or invalid token provided',
   })
   @ApiBearerAuth('access-token')
-  async getOrderHistory(@Param() getOrderHistoryDto: GetOrderHistoryDto) {
-    return this.userService.getOrderHistory(getOrderHistoryDto);
+  @ApiParam({
+    name: 'userId',
+    type: Number,
+    description: 'The ID of the user',
+    example: 1,
+  })
+  async getOrderHistory(@Param('userId', ParseIntPipe) userId: number) {
+    return this.userService.getOrderHistory(userId);
   }
 }

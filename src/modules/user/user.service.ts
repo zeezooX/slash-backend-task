@@ -5,8 +5,9 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../../config/prisma.service';
 import { JwtService } from '@nestjs/jwt';
-import { GetOrderHistoryDto, SignInDto, SignUpDto } from './user.dto';
 import * as bcrypt from 'bcrypt';
+import { SignInDto } from './dtos/sign-in.dto';
+import { SignUpDto } from './dtos/sign-up.dto';
 
 @Injectable()
 export class UserService {
@@ -90,13 +91,13 @@ export class UserService {
 
   /**
    * Get the order history for a user.
-   * @param getOrderHistoryDto - The data for retrieving the order history.
+   * @param userId - The ID of the user.
    * @returns An array of orders.
    */
-  async getOrderHistory(getOrderHistoryDto: GetOrderHistoryDto) {
+  async getOrderHistory(userId: number) {
     return this.prisma.order.findMany({
       where: {
-        userId: parseInt(getOrderHistoryDto.userId),
+        userId,
       },
     });
   }
