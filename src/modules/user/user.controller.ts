@@ -107,6 +107,7 @@ export class UserController {
     type: Number,
     description: 'The ID of the user',
     example: 1,
+    required: true,
   })
   async getOrderHistory(@Param('userId', ParseIntPipe) userId: number) {
     return this.userService.getOrderHistory(userId);
