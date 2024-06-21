@@ -90,7 +90,7 @@ export class UserController {
   })
   @ApiResponse({
     status: 403,
-    description: 'Forbidden resource',
+    description: 'None or invalid token provided',
   })
   @ApiBearerAuth('access-token')
   async getOrderHistory(@Param() getOrderHistoryDto: GetOrderHistoryDto) {
