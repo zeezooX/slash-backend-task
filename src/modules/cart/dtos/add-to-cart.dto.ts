@@ -1,7 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsNotEmpty, IsPositive } from 'class-validator';
 
+/**
+ * Data transfer object for adding a product to the cart.
+ */
 export class AddToCartDto {
+  /**
+   * The ID of the product to add to the cart.
+   */
   @IsInt()
   @IsPositive()
   @IsNotEmpty()
@@ -13,6 +19,9 @@ export class AddToCartDto {
   })
   productId: number;
 
+  /**
+   * The quantity of the product to add to the cart.
+   */
   @IsInt()
   @IsPositive()
   @IsNotEmpty()
