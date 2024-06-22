@@ -1,7 +1,14 @@
-import { Controller, Post, Get, Put, Param, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Put,
+  Param,
+  Body,
+  Request,
+} from '@nestjs/common';
 import { OrderService } from './order.service';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateOrderDto } from './dtos/create-order.dto';
 import { UpdateOrderStatusDto } from './dtos/update-order-status.dto';
 import { ApplyCouponDto } from './dtos/apply-coupon.dto';
 
@@ -11,8 +18,8 @@ export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
   @Post()
-  async createOrder(@Body() createOrderDto: CreateOrderDto) {
-    return this.orderService.createOrder(createOrderDto);
+  async createOrder(@Request() req) {
+    return this.orderService.createOrder(req.payload.userId);
   }
 
   @Get(':orderId')
@@ -22,14 +29,18 @@ export class OrderController {
 
   @Put(':orderId/status')
   async updateOrderStatus(
+    @Request() req,
     @Param('orderId') orderId: string,
     @Body() updateOrderStatusDto: UpdateOrderStatusDto,
   ) {
-    return this.orderService.updateOrderStatus(orderId, updateOrderStatusDto);
+    return this.orderService.updateOrderStatus(orderId, req.payload.userId, updateOrderStatusDto);
   }
 
-  @Post('apply-coupon')
-  async applyCoupon(@Body() applyCouponDto: ApplyCouponDto) {
-    return this.orderService.applyCoupon(applyCouponDto);
+  @Post(':apply-coupon')
+  async applyCoupon(
+    @Request() req,
+    @Body() applyCouponDto: ApplyCouponDto,
+  ) {
+    return this.orderService.applyCoupon(req.payload.userId, applyCouponDto);
   }
 }
