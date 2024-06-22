@@ -72,3 +72,13 @@ The script seeds the following users with their respective carts and orders:
 | Alice | alice@example.com  | password123   | 123 Main St, Anytown     | Apples (2), Bananas (1)                             | Order 1: Apples (2) - Completed, Order 2: Bananas (1) - Shipped |
 | Bob   | bob@example.com    | securepassword| 456 Oak Ave, Anycity     | Bananas (1), Dates (2)                              | Order 1: Dates (1) - Pending                      |
 | Carol | carol@example.com  | password123   | 789 Pine Blvd, Anothercity| Apples (1), Bananas (2), Carrots (1)                | None                                               |
+
+### Coupons
+
+The script seeds the following coupons:
+
+| Code      | Discount |
+|-----------|----------|
+| SAVE10    | 10.0     |
+| WELCOME20 | 20.0     |
+| FREESHIP  | 100.0    |

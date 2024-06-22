@@ -43,6 +43,28 @@ async function seed() {
     },
   });
 
+  // Seed coupons
+  const couponA = await prisma.coupon.create({
+    data: {
+      code: 'SAVE10',
+      discount: 10.0,
+    },
+  });
+
+  const couponB = await prisma.coupon.create({
+    data: {
+      code: 'WELCOME20',
+      discount: 20.0,
+    },
+  });
+
+  const couponC = await prisma.coupon.create({
+    data: {
+      code: 'FREESHIP',
+      discount: 100.0,
+    },
+  });
+
   // Define seed data
   const userData: Prisma.UserCreateInput[] = [
     {
