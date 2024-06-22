@@ -95,27 +95,32 @@ export class UserService {
    * @returns An array of orders.
    */
   async getOrderHistory(userId: number) {
+    // Find the orders for the user
     const orders = await this.prisma.order.findMany({
       where: {
         userId,
       },
     });
 
+    // Add the items and total to each order
     for (const order of orders) {
       order['items'] = await this.prisma.orderItem.findMany({
         where: {
           orderId: order.orderId,
         },
       });
+
+      // Get the products for the items
       const products = {};
       for (const item of order['items']) {
-        const product = await this.prisma.product.findUnique({
+        products[item.productId] = await this.prisma.product.findUnique({
           where: {
             productId: item.productId,
           },
         });
-        products[item.productId] = product;
       }
+
+      // Calculate the total for the order
       order['total'] = order['items'].reduce(
         (total, item) => total + item.quantity * products[item.productId].price,
         0,
