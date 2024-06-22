@@ -9,7 +9,7 @@ export class ProductService {
 
   /**
    * Get all products.
-   * @returns A promise that resolves to an array of products.
+   * @returns An array of products.
    */
   async getAllProducts() {
     return this.prisma.product.findMany();
@@ -18,17 +18,17 @@ export class ProductService {
   /**
    * Add a product.
    * @param createProductDto - The product data.
-   * @returns A promise that resolves to the created product.
+   * @returns The created product.
    */
   async addProduct(createProductDto: CreateProductDto) {
     return this.prisma.product.create({ data: createProductDto });
   }
 
   /**
-   * Restock a product.
+   * Increment the stock of a product.
    * @param productId - The ID of the product to restock.
    * @param restockProductDto - The restock data.
-   * @returns A promise that resolves to the updated product.
+   * @returns The updated product.
    */
   async restockProduct(
     productId: number,

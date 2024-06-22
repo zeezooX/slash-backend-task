@@ -42,7 +42,7 @@ export class UserService {
     }
 
     // Generate an access token
-    const token = this.jwtService.sign({ id: user.userId });
+    const token = this.jwtService.sign({ userId: user.userId });
 
     return { 'access-token': token };
   }

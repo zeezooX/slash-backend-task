@@ -60,13 +60,13 @@ export class ProductController {
   }
 
   /**
-   * Restock a product.
+   * Increment the stock of a product.
    * @param productId - The ID of the product to restock.
    * @param restockProductDto - The restock data.
    * @returns A promise that resolves to the restocked product.
    */
   @Put(':productId/restock')
-  @ApiOperation({ summary: 'Restock a product' })
+  @ApiOperation({ summary: 'Increment the stock of a product' })
   @ApiBody({
     type: RestockProductDto,
   })
