@@ -44,6 +44,10 @@ export class OrderController {
     status: 404,
     description: 'User not found or cart is empty',
   })
+  @ApiResponse({
+    status: 409,
+    description: 'Not enough stock',
+  })
   @ApiBearerAuth('access-token')
   async createOrder(@Request() req) {
     return this.orderService.createOrder(req.payload.userId);

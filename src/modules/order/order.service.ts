@@ -18,6 +18,7 @@ export class OrderService {
    * @returns The created order.
    * @throws NotFoundException if the user is not found.
    * @throws NotFoundException if the cart is empty.
+   * @throws ConflictException if there is not enough stock.
    */
   async createOrder(userId: number) {
     // Get the cart of the user
@@ -42,6 +43,33 @@ export class OrderService {
     // Check if the cart is empty
     if (cartItems.length === 0) {
       throw new NotFoundException('Cart is empty');
+    }
+
+    // Check if stock is available
+    for (const cartItem of cartItems) {
+      const product = await this.prisma.product.findUnique({
+        where: {
+          productId: cartItem.productId,
+        },
+      });
+
+      if (product.stock < cartItem.quantity) {
+        throw new ConflictException('Not enough stock');
+      }
+    }
+
+    // Update the stock of the products
+    for (const cartItem of cartItems) {
+      await this.prisma.product.update({
+        where: {
+          productId: cartItem.productId,
+        },
+        data: {
+          stock: {
+            decrement: cartItem.quantity,
+          },
+        },
+      });
     }
 
     // Create an order
