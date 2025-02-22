@@ -12,7 +12,7 @@ This project was made as part of the Slash Backend Intern Task. It's an implemen
 
 1. **Initialize the npm project:**
     ```bash
-    npm init
+    npm i
     ```
 
 2. **Generate the Prisma client:**
